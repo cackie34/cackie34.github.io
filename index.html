@@ -2,10 +2,313 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>CATT Codex training</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kerbal Space Program Code Vault</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: "Segoe UI", "Trebuchet MS", system-ui, -apple-system, sans-serif;
+        --nebula-dark: #0b0f2e;
+        --nebula-bright: #4a1c7a;
+        --nebula-glow: #2a8fd4;
+        --nebula-pink: #c13b9b;
+        --card: rgba(10, 12, 28, 0.82);
+        --card-border: rgba(120, 186, 255, 0.2);
+        --text: #e7f4ff;
+        --muted: #a7b8d8;
+        --accent: #7fe2ff;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background:
+          radial-gradient(circle at 20% 20%, rgba(193, 59, 155, 0.35), transparent 45%),
+          radial-gradient(circle at 80% 10%, rgba(42, 143, 212, 0.55), transparent 50%),
+          radial-gradient(circle at 50% 80%, rgba(122, 74, 189, 0.55), transparent 55%),
+          linear-gradient(160deg, var(--nebula-dark), #06091d 40%, var(--nebula-bright) 80%);
+        color: var(--text);
+      }
+
+      .stars {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background-image:
+          radial-gradient(1px 1px at 15% 20%, rgba(255, 255, 255, 0.8), transparent 60%),
+          radial-gradient(1px 1px at 75% 30%, rgba(255, 255, 255, 0.7), transparent 60%),
+          radial-gradient(1px 1px at 20% 80%, rgba(255, 255, 255, 0.6), transparent 60%),
+          radial-gradient(1px 1px at 90% 70%, rgba(255, 255, 255, 0.7), transparent 60%),
+          radial-gradient(1px 1px at 55% 45%, rgba(255, 255, 255, 0.8), transparent 60%);
+        opacity: 0.6;
+      }
+
+      main {
+        position: relative;
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 64px 20px 80px;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      header h1 {
+        font-size: clamp(2.4rem, 3vw + 1.5rem, 4rem);
+        margin-bottom: 12px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      header p {
+        max-width: 760px;
+        margin: 0 auto;
+        color: var(--muted);
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+
+      .callout {
+        background: rgba(4, 7, 20, 0.6);
+        border: 1px solid rgba(127, 226, 255, 0.25);
+        border-radius: 16px;
+        padding: 20px 26px;
+        margin: 28px auto 42px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .callout strong {
+        color: var(--accent);
+      }
+
+      .grid {
+        display: grid;
+        gap: 24px;
+      }
+
+      details {
+        background: var(--card);
+        border: 1px solid var(--card-border);
+        border-radius: 18px;
+        padding: 18px 22px;
+        box-shadow: 0 20px 40px rgba(2, 8, 32, 0.4);
+        backdrop-filter: blur(10px);
+      }
+
+      details[open] {
+        border-color: rgba(127, 226, 255, 0.5);
+      }
+
+      summary {
+        cursor: pointer;
+        font-size: 1.2rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        list-style: none;
+      }
+
+      summary::marker {
+        display: none;
+      }
+
+      .summary-pill {
+        padding: 4px 12px;
+        border-radius: 999px;
+        background: rgba(127, 226, 255, 0.18);
+        color: var(--accent);
+        font-size: 0.85rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .details-body {
+        margin-top: 16px;
+        display: grid;
+        gap: 16px;
+        color: var(--muted);
+      }
+
+      .code-block {
+        background: rgba(7, 12, 30, 0.88);
+        border-radius: 12px;
+        padding: 14px 16px;
+        border: 1px solid rgba(127, 226, 255, 0.2);
+        overflow-x: auto;
+      }
+
+      pre {
+        margin: 0;
+        font-size: 0.95rem;
+        color: #dff5ff;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      li {
+        margin-bottom: 6px;
+      }
+
+      .footer-note {
+        margin-top: 50px;
+        text-align: center;
+        font-size: 0.95rem;
+        color: var(--muted);
+      }
+    </style>
   </head>
   <body>
-    <h1>CATT Codex training</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    <div class="stars" aria-hidden="true"></div>
+    <main>
+      <header>
+        <h1>Kerbal Space Program Code Vault</h1>
+        <p>
+          Explore mission-ready snippets, naming blueprints, and control-class templates designed
+          for experimenting with Kerbal Space Program scenarios. Each category expands into a
+          dedicated drop-down so you can grab what you need without breaking launch cadence.
+        </p>
+      </header>
+
+      <section class="callout">
+        <div><strong>Tip:</strong> Copy these examples into your own KSP tools, modding notes, or mission briefings.</div>
+        <div><strong>Theme:</strong> Each block is structured to feel like a mission control checklist.</div>
+      </section>
+
+      <section class="grid">
+        <details open>
+          <summary>
+            <span class="summary-pill">Launch Scripts</span>
+            Automated sequences for reliable liftoffs
+          </summary>
+          <div class="details-body">
+            <p>Use these staged command flows to keep boosters synced, throttle windows safe, and orientation stable.</p>
+            <div class="code-block">
+              <pre>// Launch Sequence: "Atlas-Kerbin"
+SET throttle TO 1.
+LOCK STEERING TO HEADING(90, 90).
+STAGE.
+WAIT UNTIL ALTITUDE &gt; 10000.
+SET throttle TO 0.6.
+WHEN SOLIDFUEL &lt; 0.1 THEN STAGE.
+WAIT UNTIL APOAPSIS &gt; 75000.
+LOCK STEERING TO HEADING(90, 10).</pre>
+            </div>
+            <div class="code-block">
+              <pre>// Booster Sync Macro
+SET throttle TO 0.85.
+FOR engine IN ENGINES {
+  IF engine:THRUST &lt; 2.0 { engine:SHUTDOWN. }
+}</pre>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <span class="summary-pill">Rocket Naming</span>
+            Call-sign generators for fleets
+          </summary>
+          <div class="details-body">
+            <p>Mix and match these patterns to keep your vehicles distinct across mission logs.</p>
+            <ul>
+              <li><strong>Kerbin Focus:</strong> Horizon-Hopper MkII, Seafoam Vector, Mainsail Aurora.</li>
+              <li><strong>Deep Space:</strong> Nebula Sparrow, Duna Whisper, Jool Pathfinder.</li>
+              <li><strong>Heavy Lift:</strong> Titan Goliath, Forge Hammer, Atlas Beacon.</li>
+            </ul>
+            <div class="code-block">
+              <pre>// Naming Template
+[Region] + [Trait] + [Variant]
+Example: "Moho" + "Pulse" + "XR-7" = Moho Pulse XR-7</pre>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <span class="summary-pill">Control Classes</span>
+            Mission-ready crew and craft roles
+          </summary>
+          <div class="details-body">
+            <p>Slot these classes into a KSP campaign document to keep objectives and staffing clear.</p>
+            <div class="code-block">
+              <pre>CLASS FlightDirector {
+  ROLE: "Override checklists and manage abort windows"
+  FOCUS: ["Telemetry", "Flight Dynamics", "Crew Status"]
+}
+
+CLASS NavigationSpecialist {
+  ROLE: "Plot interplanetary transfers"
+  FOCUS: ["Delta-V Budget", "Oberth Burns", "Encounter Timing"]
+}</pre>
+            </div>
+            <div class="code-block">
+              <pre>CLASS PayloadEngineer {
+  ROLE: "Verify cargo deployment"
+  FOCUS: ["Fairing Separation", "Probe Activation", "Resource Checks"]
+}</pre>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <span class="summary-pill">Mission Codes</span>
+            Objective-driven action calls
+          </summary>
+          <div class="details-body">
+            <p>Each mission code can serve as a short-hand for mission control chatter or checklists.</p>
+            <div class="code-block">
+              <pre>// Mission Code: DUNA-TRACE
+OBJECTIVE: Land at Duna Highlands
+PAYLOAD: Atmospheric probe + relay
+CHECKPOINTS:
+  - Polar transfer window
+  - Mid-course correction burn
+  - Heatshield deploy at 12km</pre>
+            </div>
+            <div class="code-block">
+              <pre>// Mission Code: JETSTREAM-ORBIT
+OBJECTIVE: Establish equatorial station
+REQUIREMENTS:
+  - 2 crewed habitat modules
+  - 3,000m/s delta-v reserve
+  - Solar array redundancy</pre>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <span class="summary-pill">Common Utility Codes</span>
+            Handy snippets for quick tweaks
+          </summary>
+          <div class="details-body">
+            <p>Drop these into mission notes for quick reference when tuning craft or sessions.</p>
+            <div class="code-block">
+              <pre>// Orbit Adjust Helper
+SET targetApoapsis TO 120000.
+WHEN APOAPSIS &gt; targetApoapsis { SET throttle TO 0. };</pre>
+            </div>
+            <div class="code-block">
+              <pre>// Action Group Quicklist
+AG1: Deploy solar arrays
+AG2: Toggle science stack
+AG3: Deploy landing legs
+AG4: Toggle docking lights</pre>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <p class="footer-note">Clear skies, steady burns, and happy landings, Commander.</p>
+    </main>
   </body>
 </html>
